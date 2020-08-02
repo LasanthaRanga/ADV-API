@@ -68,3 +68,19 @@ exports.getPending = (req, res, next) => {
         res.status(500).send(error);
     }
 }
+
+exports.getAddData = (req, res, next) => {
+    try {
+        mycon.execute("  ", (error, rows, fildData) => {
+                if (!error) {
+                    res.send(rows);
+                } else {
+                    console.log(error);
+                    res.status(500).send(error);
+                }
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
