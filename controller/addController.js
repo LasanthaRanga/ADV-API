@@ -71,7 +71,9 @@ exports.getPending = (req, res, next) => {
 
 exports.getAddData = (req, res, next) => {
     try {
-        mycon.execute("  ", (error, rows, fildData) => {
+        mycon.execute(
+            "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,`user`.iduser,`user`.user_fullname,`user`.user_mobile,`user`.user_email,`user`.user_pword,`user`.user_status,`user`.user_address,`user`.user_type_iduser_type,`user`.distric,`user`.city,distric.distric_english,distric.distric_sinhala,city.city_sinhala,city.city_english,cat.`name`,cat.sinhala FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN `user` ON `user`.iduser=adv.deler INNER JOIN distric ON distric.iddistric=adv.distric_iddistric INNER JOIN city ON city.distric_iddistric=distric.iddistric AND city.idcity=adv.city_idcity INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.idadv = " + req.body.idadv
+            , (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
                 } else {

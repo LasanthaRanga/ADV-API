@@ -9,6 +9,7 @@ const checkAuth = require('../middleware/check-auth');
 router.post("/getAll", addController.getAllUsers);
 router.post("/newPost", addController.newPost);
 router.post("/getPending", addController.getPending);
+router.post("/getAddData", addController.getAddData);
 
 
 
