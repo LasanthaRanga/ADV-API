@@ -68,6 +68,7 @@ exports.addCat = (req, res, next) => {
         mycon.execute("INSERT INTO `cat`( `parent_id`, `name`, `status`, `step`, `sinhala`) VALUES ( '" + req.body.parent_id + "', '" + req.body.ename + "','1', '" + req.body.step + "',  '" + req.body.sname + "')", (error, rows, fildData) => {
             if (!error) {
                 console.log(rows);
+                res.send(rows);
             }
         });
     } catch (error) {
@@ -76,5 +77,35 @@ exports.addCat = (req, res, next) => {
     }
 }
 
+var cats = [];
+var round = 0;
+var stepsyes = 0;
+var stepsNo = 0;
 
+
+exports.getAllSubCats = (req, res, next) => {
+    this.round = 0;
+    this.methods(0);
+    setTimeout(function () {
+        res.send({ cat: cats });
+    }, 100);
+}
+
+exports.methods = (id) => {
+
+    try {
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat WHERE cat.parent_id= " + id, (error, rows, fildData) => {
+            if (!error) {
+                rows.forEach(e => {
+                    cats.push(e);
+                    this.methods(e.id);  
+                });
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
 
