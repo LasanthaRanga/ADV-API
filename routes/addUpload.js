@@ -8,7 +8,7 @@ let path = '';
 const multer = require('multer');
 var appRoot = require('app-root-path');
 
-const uppath = "../adv.codetechasia.com/uploads/adv/";
+const uppath = "./uploads";
 const downpath = "https://www.coopshop.lk/uploads/profile/";
 
 const storage = multer.diskStorage({
