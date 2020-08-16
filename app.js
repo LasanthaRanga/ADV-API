@@ -28,7 +28,8 @@ const allowedOrigins = [
   'http://localhost:8100',
   'http://test.coopshop.lk',
   'https://test.coopshop.lk',
-  'https://coopshop.lk'
+  'https://coopshop.lk',
+  'https://adv.codetechasia.com'
 
 ];
 
