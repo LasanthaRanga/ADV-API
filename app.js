@@ -28,7 +28,7 @@ const allowedOrigins = [
   'http://localhost:8100',
   'http://supbox.lk',  
   'https://supbox.lk',
-  'https://adv.codetechasia.com', 
+  'https://adv.codetechasia.com',
 
 ];
 
