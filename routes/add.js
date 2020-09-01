@@ -12,7 +12,7 @@ router.post("/getPending", addController.getPending);
 router.post("/getAddData", addController.getAddData);
 router.post("/setActiveAdv", addController.setActiveAdv);
 router.post("/getActive", addController.getActive);
-
+router.post("/getActiveByDistict", addController.getActiveByDistict);
 
 
 

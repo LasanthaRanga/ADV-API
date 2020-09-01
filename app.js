@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const catRouter = require('./routes/cat');
 const addRouter = require('./routes/add');
 const addUpRouter = require('./routes/addUpload');
+const catUpRouter = require('./routes/catUpload');
 
 
 const app = express();
@@ -23,7 +24,7 @@ const allowedOrigins = [
   'capacitor://localhost',
   'ionic://localhost',
   'http://localhost',
-  'http://localhost:4200',
+  'http://localhost:4100',
   'http://localhost:8080',
   'http://localhost:8100',
   'http://supbox.lk',  
@@ -58,6 +59,7 @@ app.use('/users', usersRouter);
 app.use('/cat', catRouter);
 app.use('/add', addRouter);
 app.use('/addUp', addUpRouter);
+app.use('/catUp', catUpRouter);
 
 
 app.use((req, res, next) => {

@@ -88,9 +88,9 @@ exports.getAllSubCats = (req, res, next) => {
     cats = [];
     this.round = 0;
     this.methods(req.body.id);
-  
+
     setTimeout(function () {
-        let catsids = " ";    
+        let catsids = " ";
         var len = cats.length;
         for (var i = 0; i < len; i++) {
             if (i == len - 1) {
@@ -106,7 +106,7 @@ exports.getAllSubCats = (req, res, next) => {
 }
 
 exports.methods = (id) => {
-    
+
     try {
         mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat WHERE cat.parent_id= " + id, (error, rows, fildData) => {
             if (!error) {
@@ -130,6 +130,58 @@ exports.getAddsByCats = (req, res, next) => {
             "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
             " IN (" + req.body.list + ") " +
             " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            (error, rows, fildData) => {
+                if (!error) {
+                    res.send(rows);
+                }
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+exports.getAddsByCatsAndDis = (req, res, next) => {
+    try {
+        mycon.execute(
+            "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
+            " IN (" + req.body.list + ")  AND  adv.distric_iddistric = '" + req.body.id + "'" +
+            " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            (error, rows, fildData) => {
+                if (!error) {
+                    res.send(rows);
+                }
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+exports.getAddsByCatsAndCity = (req, res, next) => {
+    try {
+        mycon.execute(
+            "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
+            " IN (" + req.body.list + ")  AND  adv.city_idcity = '" + req.body.id + "'" +
+            " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            (error, rows, fildData) => {
+                if (!error) {
+                    res.send(rows);
+                }
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+
+
+
+exports.getMainCats = (req, res, next) => {
+    try {
+        mycon.execute(
+            "SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.imagePath,cat.description FROM cat WHERE cat.parent_id=0",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);

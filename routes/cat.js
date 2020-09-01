@@ -10,6 +10,9 @@ router.post("/getAll", catController.getAll);
 router.post("/addCat", catController.addCat);
 router.post("/getAllSubCats", catController.getAllSubCats);
 router.post("/getAddsByCats", catController.getAddsByCats);
+router.post("/getAddsByCatsAndDis", catController.getAddsByCatsAndDis);
+router.post("/getAddsByCatsAndCity", catController.getAddsByCatsAndCity);
+router.post("/getMainCats", catController.getMainCats);
 
 
 
