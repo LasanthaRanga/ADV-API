@@ -87,18 +87,25 @@ var adds;
 exports.getAllSubCats = (req, res, next) => {
     cats = [];
     this.round = 0;
+    console.log(req.body.id);
+
     this.methods(req.body.id);
 
     setTimeout(function () {
-        let catsids = " ";
+        let catsids = '';
         var len = cats.length;
         for (var i = 0; i < len; i++) {
             if (i == len - 1) {
-                catsids += cats[i].id
+                catsids += cats[i].id + ',' + req.body.id;
             } else {
-                catsids += cats[i].id + ','
+                catsids += cats[i].id + ',';
             }
         }
+
+        if (len == 0) {
+            catsids = req.body.id;
+        }
+
         console.log(catsids);
         res.send({ ids: catsids });
 
