@@ -7,7 +7,7 @@ var dateFormat = require('dateformat');
 exports.getAll = (req, res, next) => {
     try {
         let ar = [];
-        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step FROM cat ORDER BY cat.step ASC",
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step FROM cat ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
                 for (i = 0; i < len; i++) {
@@ -188,7 +188,7 @@ exports.getAddsByCatsAndCity = (req, res, next) => {
 exports.getMainCats = (req, res, next) => {
     try {
         mycon.execute(
-            "SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.imagePath,cat.description FROM cat WHERE cat.parent_id=0",
+            "SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.imagePath,cat.description FROM cat WHERE cat.parent_id=0 ORDER BY cat.id ASC",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
