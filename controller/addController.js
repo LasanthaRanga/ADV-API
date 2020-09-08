@@ -29,7 +29,7 @@ exports.newPost = (req, res, next) => {
                         "  `con_whatsapp`,`con_fb`,`con_web`,`con_youtube`,`details_other`,`adv_idadv`) " +
                         "  VALUES ('" + req.body.company + "','" + req.body.owner + "','" + req.body.adl1 + "','" + req.body.adl2 + "','" + req.body.adl3 + "', " +
                         "  '" + req.body.des + "','" + req.body.companyS + "','" + req.body.ownerS + "', " +
-                        "  '" + req.body.desS + "','" + req.body.phone + "','" + req.body.mobile + "','" + req.body.imo + "',NULL,NULL,'" + req.body.fb + "','" + req.body.web + "','" + req.body.yt + "','" + req.body.other + "','" + id + "')",
+                        "  '" + req.body.desS + "','" + req.body.phone + "','" + req.body.mobile + "','" + req.body.imo + "','" + req.body.viber + "',NULL,'" + req.body.fb + "','" + req.body.web + "','" + req.body.yt + "',NULL,'" + id + "')",
                         (er, ro, fd) => {
                             if (!er) {
                                 res.send({ 'idAdv': id });
