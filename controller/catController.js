@@ -8,16 +8,17 @@ var dateFormat = require('dateformat');
 exports.getAll = (req, res, next) => {
     try {
         let ar = [];
-        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step FROM cat ORDER BY cat.step ASC,cat.id ASC",
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
                 for (i = 0; i < len; i++) {
                     var e = rows[i];
-                    obj = {
+                    var obj = {
                         id: e.id,
                         parent_id: e.parent_id,
                         name: e.name,
                         status: e.status,
+                        sinhala: e.sinhala,
                         step: e.step,
                         child: []
                     }
@@ -70,19 +71,23 @@ exports.getAllByMain = (req, res, next) => {
     console.log("MID = " + mid);
     try {
         let ar = [];
-        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step FROM cat ORDER BY cat.step ASC,cat.id ASC",
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
                 for (i = 0; i < len; i++) {
                     var e = rows[i];
-                    obj = {
+                    var obj = {
                         id: e.id,
                         parent_id: e.parent_id,
                         name: e.name,
+                        sinhala: e.sinhala,
                         status: e.status,
                         step: e.step,
                         child: []
                     }
+
+                    console.log(obj);
+
                     if (obj.parent_id == 0) {
                         if (e.id == mid) {
                             ar.push(obj); // Step 00
