@@ -7,6 +7,7 @@ const checkAuth = require('../middleware/check-auth');
 
 
 router.post("/getAll", catController.getAll);
+router.post("/getAllByMain", catController.getAllByMain);
 router.post("/addCat", catController.addCat);
 router.post("/getAllSubCats", catController.getAllSubCats);
 router.post("/getAddsByCats", catController.getAddsByCats);
