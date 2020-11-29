@@ -86,8 +86,6 @@ exports.getAllByMain = (req, res, next) => {
                         child: []
                     }
 
-                    console.log(obj);
-
                     if (obj.parent_id == 0) {
                         if (e.id == mid) {
                             ar.push(obj); // Step 00

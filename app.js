@@ -30,6 +30,8 @@ const allowedOrigins = [
   'http://localhost:8100',
   'http://supbox.lk',  
   'https://supbox.lk',
+  'https://probox.lk',
+  'http://probox.lk',
   'https://adv.codetechasia.com',
 
 ];
