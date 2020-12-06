@@ -2,7 +2,30 @@ const mycon = require('../util/conn');
 
 var dateFormat = require('dateformat');
 
-
+exports.rES = (str) => {
+    return str.toString().replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+        switch (char) {
+            case "\0":
+                return "\\0";
+            case "\x08":
+                return "\\b";
+            case "\x09":
+                return "\\t";
+            case "\x1a":
+                return "\\z";
+            case "\n":
+                return "\\n";
+            case "\r":
+                return "\\r";
+            case "\"":
+            case "'":
+            case "\\":
+            case "%":
+                return "\\" + char; // prepends a backslash to backslash, percent,
+            // and double/single quotes
+        }
+    });
+}
 
 
 exports.getAll = (req, res, next) => {
@@ -137,7 +160,7 @@ exports.getAllByMain = (req, res, next) => {
 
 exports.addCat = (req, res, next) => {
     try {
-        mycon.execute("INSERT INTO `cat`( `parent_id`, `name`, `status`, `step`, `sinhala`) VALUES ( '" + req.body.parent_id + "', '" + req.body.ename + "','1', '" + req.body.step + "',  '" + req.body.sname + "')", (error, rows, fildData) => {
+        mycon.execute("INSERT INTO `cat`( `parent_id`, `name`, `status`, `step`, `sinhala`) VALUES ( '" + this.rES(req.body.parent_id) + "', '" + this.rES(req.body.ename) + "','1', '" + this.rES(req.body.step) + "',  '" + this.rES(req.body.sname) + "')", (error, rows, fildData) => {
             if (!error) {
                 console.log(rows);
                 res.send(rows);

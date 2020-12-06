@@ -2,6 +2,31 @@ const mycon = require('../util/conn');
 const jwt = require('jsonwebtoken');
 
 
+exports.rES = (str) => {
+    return str.toString().replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+        switch (char) {
+            case "\0":
+                return "\\0";
+            case "\x08":
+                return "\\b";
+            case "\x09":
+                return "\\t";
+            case "\x1a":
+                return "\\z";
+            case "\n":
+                return "\\n";
+            case "\r":
+                return "\\r";
+            case "\"":
+            case "'":
+            case "\\":
+            case "%":
+                return "\\" + char; // prepends a backslash to backslash, percent,
+            // and double/single quotes
+        }
+    });
+}
+
 exports.getAllUsers = (req, res, next) => {
     try {
         mycon.execute("select * from user",
@@ -49,7 +74,7 @@ exports.getCitys = (req, res, next) => {
 exports.signUp = (req, res, next) => {
     try {
         mycon.execute("INSERT INTO `user`( `user_fullname`, `user_mobile`, `user_email`, `user_pword`, `user_status`, `user_address`, `user_type_iduser_type`, `distric`, `city`) " +
-            " VALUES ( '" + req.body.fname + "', '" + req.body.mobile + "', '" + req.body.email + "', '" + req.body.pword + "', '0', '" + req.body.address + "', 3, " + req.body.did + ", " + req.body.cid + ")",
+            " VALUES ( '" + this.rES(req.body.fname) + "', '" + this.rES(req.body.mobile) + "', '" + this.rES(req.body.email) + "', '" + this.rES(req.body.pword) + "', '0', '" + this.rES(req.body.address) + "', 3, " + this.rES(req.body.did) + ", " + this.rES(req.body.cid) + ")",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
@@ -80,16 +105,16 @@ exports.login = (req, res, next) => {
                                 uname: rows[0].user_fullname,
                                 mobile: rows[0].user_mobile
                             }
-                            const token = jwt.sign(obj,process.env.JWT_KEY,{expiresIn: "1h"});
+                            const token = jwt.sign(obj, process.env.JWT_KEY, { expiresIn: "1h" });
                             return res.status(200).json({
                                 message: "Auth Successfull",
                                 token: token
-                            });                           
+                            });
                         } else {
-                            return res.status(401).json({message: 'user name or password is wrong'});
+                            return res.status(401).json({ message: 'user name or password is wrong' });
                         }
                     } else {
-                        return res.status(401).json({message: 'user name or password is wrong'});
+                        return res.status(401).json({ message: 'user name or password is wrong' });
                     }
                 } else {
                     console.log(error);

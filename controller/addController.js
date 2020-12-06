@@ -2,6 +2,35 @@ const mycon = require('../util/conn');
 const jwt = require('jsonwebtoken');
 var dateFormat = require('dateformat');
 
+
+
+exports.rES = (str) => {
+    return str.toString().replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+        switch (char) {
+            case "\0":
+                return "\\0";
+            case "\x08":
+                return "\\b";
+            case "\x09":
+                return "\\t";
+            case "\x1a":
+                return "\\z";
+            case "\n":
+                return "\\n";
+            case "\r":
+                return "\\r";
+            case "\"":
+            case "'":
+            case "\\":
+            case "%":
+                return "\\" + char; // prepends a backslash to backslash, percent,
+            // and double/single quotes
+        }
+    });
+}
+
+
+
 exports.getAllUsers = (req, res, next) => {
     try {
         mycon.execute("select * from user",
@@ -20,16 +49,16 @@ exports.newPost = (req, res, next) => {
     var day = dateFormat(new Date(), "yyyy-mm-dd");
     try {
         mycon.execute("INSERT INTO `adv` ( `city_idcity`, `distric_iddistric`, `cat_idcat`, `deler`, `adv_start_date`, `adv_end_date`, `adv_status`, `adv_priority` ) " +
-            " VALUES 	(  '" + req.body.city + "', '" + req.body.distric + "', '" + req.body.lastSelected + "', '" + req.body.user + "', '" + day + "', NULL, 0, NULL )",
+            " VALUES 	(  '" + this.rES(req.body.city) + "', '" + this.rES(req.body.distric) + "', '" + this.rES(req.body.lastSelected) + "', '" + this.rES(req.body.user) + "', '" + day + "', NULL, 0, NULL )",
             (error, rows, fildData) => {
                 if (!error) {
                     let id = rows.insertId;
                     mycon.execute("INSERT INTO `details` (`company_name`,`owner_name`,`address1`,`address2`,`address3`,`description`, " +
                         " `company_name_sinhala`,`owner_name_sihala`,`description_sinhala`,`con_phone`,`con_mobile`,`con_imo`,`con_viber`, " +
                         "  `con_whatsapp`,`con_fb`,`con_web`,`con_youtube`,`details_other`,`adv_idadv`) " +
-                        "  VALUES ('" + req.body.company + "','" + req.body.owner + "','" + req.body.adl1 + "','" + req.body.adl2 + "','" + req.body.adl3 + "', " +
-                        "  '" + req.body.des + "','" + req.body.companyS + "','" + req.body.ownerS + "', " +
-                        "  '" + req.body.desS + "','" + req.body.phone + "','" + req.body.mobile + "','" + req.body.imo + "','" + req.body.viber + "',NULL,'" + req.body.fb + "','" + req.body.web + "','" + req.body.yt + "',NULL,'" + id + "')",
+                        "  VALUES ('" + this.rES(req.body.company) + "','" + this.rES(req.body.owner) + "','" + this.rES(req.body.adl1) + "','" + this.rES(req.body.adl2) + "','" + this.rES(req.body.adl3) + "', " +
+                        "  '" + this.rES(req.body.des) + "','" + this.rES(req.body.companyS) + "','" + this.rES(req.body.ownerS) + "', " +
+                        "  '" + this.rES(req.body.desS) + "','" + this.rES(req.body.phone) + "','" + this.rES(req.body.mobile) + "','" + this.rES(req.body.imo) + "','" + this.rES(req.body.viber) + "',NULL,'" + this.rES(req.body.fb) + "','" + this.rES(req.body.web) + "','" + this.rES(req.body.yt) + "',NULL,'" + id + "')",
                         (er, ro, fd) => {
                             if (!er) {
                                 res.send({ 'idAdv': id });
