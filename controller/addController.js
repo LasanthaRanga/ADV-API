@@ -59,7 +59,7 @@ exports.newPost = (req, res, next) => {
                         "  `con_whatsapp`,`con_fb`,`con_web`,`con_youtube`,`details_other`,`adv_idadv`) " +
                         "  VALUES ('" + this.rES(req.body.company) + "','" + this.rES(req.body.owner) + "','" + this.rES(req.body.adl1) + "','" + this.rES(req.body.adl2) + "','" + this.rES(req.body.adl3) + "', " +
                         "  '" + this.rES(req.body.des) + "','" + this.rES(req.body.companyS) + "','" + this.rES(req.body.ownerS) + "', " +
-                        "  '" + this.rES(req.body.desS) + "','" + this.rES(req.body.phone) + "','" + this.rES(req.body.mobile) + "','" + this.rES(req.body.imo) + "','" + this.rES(req.body.viber) + "',NULL,'" + this.rES(req.body.fb) + "','" + this.rES(req.body.web) + "','" + this.rES(req.body.yt) + "',NULL,'" + id + "')",
+                        "  '" + this.rES(req.body.desS) + "','" + this.rES(req.body.phone) + "','" + this.rES(req.body.mobile) + "','" + this.rES(req.body.imo) + "','" + this.rES(req.body.viber) + "','" + this.rES(req.body.price) + "','" + this.rES(req.body.fb) + "','" + this.rES(req.body.web) + "','" + this.rES(req.body.yt) + "',NULL,'" + id + "')",
                         (er, ro, fd) => {
                             if (!er) {
                                 res.send({ 'idAdv': id });

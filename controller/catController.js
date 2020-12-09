@@ -296,3 +296,21 @@ exports.getMainCats = (req, res, next) => {
     }
 }
 
+exports.saveCity = (req, res, next) => {
+    try {
+        mycon.execute(
+            "INSERT INTO  `city`(  `city_sinhala`, `city_english`, `city_status`, `distric_iddistric`)" +
+            " VALUES (  '" + this.rES(req.body.sinhala) + "', '" + this.rES(req.body.english) + "', 1, '" + req.body.dis + "')",
+            (error, rows, fildData) => {
+                if (!error) {
+                    res.send(rows);
+                }
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+
+
