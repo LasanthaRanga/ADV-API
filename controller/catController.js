@@ -95,6 +95,7 @@ exports.getAllByMain = (req, res, next) => {
     console.log("MID = " + mid);
     try {
         let ar = [];
+        
         mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
