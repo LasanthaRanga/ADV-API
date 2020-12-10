@@ -115,10 +115,10 @@ exports.login = (req, res, next) => {
                                 token: token
                             });
                         } else {
-                            return res.status(401).json({ message: 'user name or password is wrong' });
+                            return res.status(401).json({ message: 'password is wrong' });
                         }
                     } else {
-                        return res.status(401).json({ message: 'user name or password is wrong' });
+                        return res.status(401).json({ message: 'user name wrong' });
                     }
                 } else {
                     console.log(error);
