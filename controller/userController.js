@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 
 exports.rES = (str) => {
-    str = str + "";
+    str = str;
     return str.toString().replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
         switch (char) {
             case "\0":
