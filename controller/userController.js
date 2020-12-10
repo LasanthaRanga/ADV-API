@@ -93,13 +93,13 @@ exports.signUp = (req, res, next) => {
 exports.login = (req, res, next) => {
 
     try {
-        mycon.execute("SELECT `user`.user_pword,`user`.user_email,`user`.iduser,user_type.iduser_type,user_type.user_type_name,user_type.user_type_description, `user`.user_fullname, `user`.user_mobile FROM `user` INNER JOIN user_type ON `user`.user_type_iduser_type=user_type.iduser_type WHERE `user`.user_email= '" + this.rES(req.body.email) + "'",
+        mycon.execute("SELECT `user`.user_pword,`user`.user_email,`user`.iduser,user_type.iduser_type,user_type.user_type_name,user_type.user_type_description, `user`.user_fullname, `user`.user_mobile FROM `user` INNER JOIN user_type ON `user`.user_type_iduser_type=user_type.iduser_type WHERE `user`.user_email= '" + req.body.email + "'",
             (error, rows, fildData) => {
                 if (!error) {
                     if (rows[0] != null) {
                     
                         let uid = rows[0].iduser;
-                        let pword = this.rES(req.body.pword);
+                        let pword = req.body.pword;
                         if (pword == rows[0].user_pword) {
                             let obj = {
                                 uid: uid,
