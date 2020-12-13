@@ -74,8 +74,8 @@ exports.getCitys = (req, res, next) => {
 
 exports.signUp = (req, res, next) => {
     try {
-        mycon.execute("INSERT INTO `user`( `user_fullname`, `user_mobile`, `user_email`, `user_pword`, `user_status`, `user_address`, `user_type_iduser_type`, `distric`, `city`) " +
-            " VALUES ( '" + this.rES(req.body.fname) + "', '" + this.rES(req.body.mobile) + "', '" + this.rES(req.body.email) + "', '" + this.rES(req.body.pword) + "', '0', '" + this.rES(req.body.address) + "', 3, " + this.rES(req.body.did) + ", " + this.rES(req.body.cid) + ")",
+        mycon.execute("INSERT INTO `user`( `user_fullname`, `user_mobile`, `user_email`, `user_pword`, `user_status`, `user_address`, `user_type_iduser_type`, `distric`) " +
+            " VALUES ( '" + this.rES(req.body.fname) + "', '" + this.rES(req.body.mobile) + "', '" + this.rES(req.body.email) + "', '" + this.rES(req.body.pword) + "', '0', '" + this.rES(req.body.address) + "', 3, " + this.rES(req.body.did) + ")",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
