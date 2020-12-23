@@ -30,9 +30,10 @@ exports.rES = (str) => {
 
 
 exports.getAll = (req, res, next) => {
+    console.log(req.body);
     try {
         let ar = [];
-        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat ORDER BY cat.step ASC,cat.id ASC",
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat WHERE cat.site='" + req.body.site + "' ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
                 for (i = 0; i < len; i++) {
@@ -95,7 +96,7 @@ exports.getAllByMain = (req, res, next) => {
     console.log("MID = " + mid);
     try {
         let ar = [];
-        
+
         mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat ORDER BY cat.step ASC,cat.id ASC",
             (error, rows, fildData) => {
                 len = rows.length;
@@ -162,7 +163,7 @@ exports.getAllByMain = (req, res, next) => {
 
 exports.addCat = (req, res, next) => {
     try {
-        mycon.execute("INSERT INTO `cat`( `parent_id`, `name`, `status`, `step`, `sinhala`) VALUES ( '" + this.rES(req.body.parent_id) + "', '" + this.rES(req.body.ename) + "','1', '" + this.rES(req.body.step) + "',  '" + this.rES(req.body.sname) + "')", (error, rows, fildData) => {
+        mycon.execute("INSERT INTO `cat`( `parent_id`, `name`, `status`, `step`, `sinhala`,`site`) VALUES ( '" + this.rES(req.body.parent_id) + "', '" + this.rES(req.body.ename) + "','1', '" + this.rES(req.body.step) + "',  '" + this.rES(req.body.sname) + "','" + req.body.site + "')", (error, rows, fildData) => {
             if (!error) {
                 console.log(rows);
                 res.send(rows);
@@ -186,7 +187,7 @@ exports.getAllSubCats = (req, res, next) => {
     this.round = 0;
     console.log(req.body.id);
 
-    this.methods(req.body.id);
+    this.methods(req.body.id, req.body.site);
 
     setTimeout(function () {
         let catsids = '';
@@ -209,10 +210,10 @@ exports.getAllSubCats = (req, res, next) => {
     }, 100);
 }
 
-exports.methods = (id) => {
+exports.methods = (id, site) => {
 
     try {
-        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala FROM cat WHERE cat.parent_id= " + id, (error, rows, fildData) => {
+        mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.site FROM cat WHERE cat.parent_id='" + id + "' AND cat.site='" + site + "'", (error, rows, fildData) => {
             if (!error) {
                 rows.forEach(e => {
                     cats.push(e);
@@ -283,9 +284,10 @@ exports.getAddsByCatsAndCity = (req, res, next) => {
 
 
 exports.getMainCats = (req, res, next) => {
+    console.log(req.body);
     try {
         mycon.execute(
-            "SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.imagePath,cat.description FROM cat WHERE cat.parent_id=0 ORDER BY cat.id ASC",
+            "SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.imagePath,cat.description,cat.site FROM cat WHERE cat.parent_id=0 AND cat.site='" + req.body.site + "' ORDER BY cat.id ASC",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
