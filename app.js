@@ -32,8 +32,6 @@ const allowedOrigins = [
   'https://supbox.lk',
   'https://probox.lk',
   'http://probox.lk',
-  'http://test.probox.lk',
-  'https://test.probox.lk',
   'https://adv.codetechasia.com',
 
 ];
