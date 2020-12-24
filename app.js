@@ -28,6 +28,7 @@ const allowedOrigins = [
   'http://localhost:4200',
   'http://localhost:8080',
   'http://localhost:8100',
+  'https://test.probox.lk',
   'http://supbox.lk',  
   'https://supbox.lk',
   'https://probox.lk',
