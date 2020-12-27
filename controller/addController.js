@@ -49,8 +49,8 @@ exports.getAllUsers = (req, res, next) => {
 exports.newPost = (req, res, next) => {
     var day = dateFormat(new Date(), "yyyy-mm-dd");
     try {
-        mycon.execute("INSERT INTO `adv` ( `city_idcity`, `distric_iddistric`, `cat_idcat`, `deler`, `adv_start_date`, `adv_end_date`, `adv_status`, `adv_priority` ) " +
-            " VALUES 	(  '" + this.rES(req.body.city) + "', '" + this.rES(req.body.distric) + "', '" + this.rES(req.body.lastSelected) + "', '" + this.rES(req.body.user) + "', '" + day + "', NULL, 0, NULL )",
+        mycon.execute("INSERT INTO `adv` ( `city_idcity`, `distric_iddistric`, `cat_idcat`, `deler`, `adv_start_date`, `adv_end_date`, `adv_status`, `adv_priority`, `site`) " +
+            " VALUES 	(  '" + this.rES(req.body.city) + "', '" + this.rES(req.body.distric) + "', '" + this.rES(req.body.lastSelected) + "', '" + this.rES(req.body.user) + "', '" + day + "', NULL, 0, NULL,'" + req.body.site + "' )",
             (error, rows, fildData) => {
                 if (!error) {
                     let id = rows.insertId;

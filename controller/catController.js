@@ -185,7 +185,7 @@ var adds;
 exports.getAllSubCats = (req, res, next) => {
     cats = [];
     this.round = 0;
-    console.log(req.body.id);
+   // console.log(req.body);
 
     this.methods(req.body.id, req.body.site);
 
@@ -207,10 +207,14 @@ exports.getAllSubCats = (req, res, next) => {
         console.log(catsids);
         res.send({ ids: catsids });
 
-    }, 100);
+    }, 300);
 }
 
 exports.methods = (id, site) => {
+
+    // console.log('=============');
+    // console.log(site);
+    // console.log('=============');
 
     try {
         mycon.execute("SELECT cat.id,cat.parent_id,cat.`name`,cat.`status`,cat.step,cat.sinhala,cat.site FROM cat WHERE cat.parent_id='" + id + "' AND cat.site='" + site + "'", (error, rows, fildData) => {
