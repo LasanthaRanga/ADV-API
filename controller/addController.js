@@ -30,6 +30,39 @@ exports.rES = (str) => {
     });
 }
 
+exports.getHomeAdd = (req, res, next) => {
+    try {
+        var day = dateFormat(new Date(), "yyyy-mm-dd");
+        mycon.execute("SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,adv.iduser,adv.site,image.image_path FROM adv INNER JOIN image ON image.adv_idadv=adv.idadv " +
+            "WHERE adv.cat_idcat IN (" + req.body.catids + ") AND adv.adv_priority= '" + req.body.priority + "' AND adv.site='" + req.body.site + "' AND adv.adv_end_date > '" + day + "' GROUP BY adv.idadv ORDER BY adv.idadv DESC LIMIT '" + req.body.limit + "'", (e, r, f) => {
+                if (!e) {
+                    res.send(r);
+                }
+            })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+exports.getSiteAdd = (req, res, next) => {
+    try {
+        var day = dateFormat(new Date(), "yyyy-mm-dd");
+        mycon.execute(" SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,adv.iduser,adv.site,image.image_path,cat.`name`,cat.sinhala FROM adv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat  " +
+            " WHERE  adv.adv_priority= '" + req.body.priority + "' AND adv.site='" + req.body.site + "' AND adv.adv_end_date >= '" + day + "' GROUP BY adv.idadv ORDER BY adv.idadv DESC LIMIT  "+ req.body.limit + "", (e, r, f) => {
+                if (!e) {
+                    res.send(r);
+                }else{
+                    console.log(e);
+                }
+            })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+
 
 
 exports.getAllUsers = (req, res, next) => {

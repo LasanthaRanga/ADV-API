@@ -13,6 +13,8 @@ router.post("/getAddData", addController.getAddData);
 router.post("/setActiveAdv", addController.setActiveAdv);
 router.post("/getActive", addController.getActive);
 router.post("/getActiveByDistict", addController.getActiveByDistict);
+router.post("/getHomeAdd", addController.getHomeAdd);
+router.post("/getSiteAdd", addController.getSiteAdd);
 
 
 
