@@ -15,8 +15,7 @@ router.post("/getActive", addController.getActive);
 router.post("/getActiveByDistict", addController.getActiveByDistict);
 router.post("/getHomeAdd", addController.getHomeAdd);
 router.post("/getSiteAdd", addController.getSiteAdd);
-
-
-
+// router.post("/getSiteAdd", addController.getSiteAdd);
+//commnet line
 
 module.exports = router;
