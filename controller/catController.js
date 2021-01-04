@@ -207,7 +207,7 @@ exports.getAllSubCats = (req, res, next) => {
         console.log(catsids);
         res.send({ ids: catsids });
 
-    }, 500);
+    }, 300);
 }
 
 exports.methods = (id, site) => {
