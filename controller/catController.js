@@ -239,7 +239,7 @@ exports.getAddsByCats = (req, res, next) => {
         mycon.execute(
             "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
             " IN (" + req.body.list + ") AND adv_end_date>= '" + day + "' " +
-            " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            " GROUP BY adv.idadv ORDER BY adv.idadv DESC",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
@@ -257,7 +257,7 @@ exports.getAddsByCatsAndDis = (req, res, next) => {
         mycon.execute(
             "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
             " IN (" + req.body.list + ")  AND  adv.distric_iddistric = '" + req.body.id + "' AND adv_end_date>= '" + day + "' " +
-            " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            " GROUP BY adv.idadv ORDER BY adv.idadv DESC",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
@@ -275,7 +275,7 @@ exports.getAddsByCatsAndCity = (req, res, next) => {
         mycon.execute(
             "SELECT adv.idadv,adv.city_idcity,adv.distric_iddistric,adv.cat_idcat,adv.deler,adv.adv_start_date,adv.adv_end_date,adv.adv_status,adv.adv_priority,details.iddetails,details.company_name,details.owner_name,details.address1,details.address2,details.address3,details.description,details.company_name_sinhala,details.owner_name_sihala,details.description_sinhala,details.con_phone,details.con_mobile,details.con_imo,details.con_viber,details.con_whatsapp,details.con_fb,details.con_web,details.con_youtube,details.details_other,details.adv_idadv,image.idimage,image.image_path,image.image_status,cat.id,cat.`name` FROM adv INNER JOIN details ON details.adv_idadv=adv.idadv INNER JOIN image ON image.adv_idadv=adv.idadv INNER JOIN cat ON cat.id=adv.cat_idcat WHERE adv.adv_status=1 AND adv.cat_idcat  " +
             " IN (" + req.body.list + ")  AND  adv.city_idcity = '" + req.body.id + "' AND adv_end_date>= '" + day + "'" +
-            " GROUP BY adv.idadv ORDER BY adv.adv_priority ASC",
+            " GROUP BY adv.idadv ORDER BY adv.idadv DESC",
             (error, rows, fildData) => {
                 if (!error) {
                     res.send(rows);
