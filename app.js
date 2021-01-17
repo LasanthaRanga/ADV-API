@@ -34,6 +34,8 @@ const allowedOrigins = [
   'https://supbox.lk',
   'https://probox.lk',
   'http://probox.lk',
+  'http://kumi.lk',
+  'https://kumi.lk',
   'https://adv.codetechasia.com',
 
 ];
